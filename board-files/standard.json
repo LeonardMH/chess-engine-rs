@@ -1,0 +1,9 @@
+{
+  "title": "Standard board positioning, game beginning",
+  "variant": "standard",
+  "positions": {
+    "white": ["pawn:a2", "pawn:b2", "pawn:c2", "pawn:d2", "pawn:e2", "pawn:f2", "pawn:g2", "pawn:h2", "rook:a1", "knight:b1", "bishop:c1", "king:d1", "queen:e1", "bishop:f1", "knight:g1", "rook:h1"],
+    "black": ["pawn:a7", "pawn:b7", "pawn:c7", "pawn:d7", "pawn:e7", "pawn:f7", "pawn:g7", "pawn:h7", "rook:a8", "knight:b8", "bishop:c8", "king:d8", "queen:e8", "bishop:f8", "knight:g8", "rook:h8"]
+  },
+  "moves": []
+}
