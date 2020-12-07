@@ -1,9 +1,143 @@
 {
-  "title": "Standard board positioning, game beginning",
-  "variant": "standard",
-  "positions": {
-    "white": ["pawn:a2", "pawn:b2", "pawn:c2", "pawn:d2", "pawn:e2", "pawn:f2", "pawn:g2", "pawn:h2", "rook:a1", "knight:b1", "bishop:c1", "king:d1", "queen:e1", "bishop:f1", "knight:g1", "rook:h1"],
-    "black": ["pawn:a7", "pawn:b7", "pawn:c7", "pawn:d7", "pawn:e7", "pawn:f7", "pawn:g7", "pawn:h7", "rook:a8", "knight:b8", "bishop:c8", "king:d8", "queen:e8", "bishop:f8", "knight:g8", "rook:h8"]
+  "game": {
+    "title": "Standard board positioning, game beginning",
+    "variant": "standard"
   },
-  "moves": []
+  "pieces": {
+    "moves": [],
+    "positions": {
+      "black": [
+        {
+          "position": "a7",
+          "rank": "Pawn"
+        },
+        {
+          "position": "b7",
+          "rank": "Pawn"
+        },
+        {
+          "position": "c7",
+          "rank": "Pawn"
+        },
+        {
+          "position": "d7",
+          "rank": "Pawn"
+        },
+        {
+          "position": "e7",
+          "rank": "Pawn"
+        },
+        {
+          "position": "f7",
+          "rank": "Pawn"
+        },
+        {
+          "position": "g7",
+          "rank": "Pawn"
+        },
+        {
+          "position": "h7",
+          "rank": "Pawn"
+        },
+        {
+          "position": "a8",
+          "rank": "Rook"
+        },
+        {
+          "position": "b8",
+          "rank": "Knight"
+        },
+        {
+          "position": "c8",
+          "rank": "Bishop"
+        },
+        {
+          "position": "d8",
+          "rank": "King"
+        },
+        {
+          "position": "e8",
+          "rank": "Queen"
+        },
+        {
+          "position": "f8",
+          "rank": "Bishop"
+        },
+        {
+          "position": "g8",
+          "rank": "Knight"
+        },
+        {
+          "position": "h8",
+          "rank": "Rook"
+        }
+      ],
+      "white": [
+        {
+          "position": "a2",
+          "rank": "Pawn"
+        },
+        {
+          "position": "b2",
+          "rank": "Pawn"
+        },
+        {
+          "position": "c2",
+          "rank": "Pawn"
+        },
+        {
+          "position": "d2",
+          "rank": "Pawn"
+        },
+        {
+          "position": "e2",
+          "rank": "Pawn"
+        },
+        {
+          "position": "f2",
+          "rank": "Pawn"
+        },
+        {
+          "position": "g2",
+          "rank": "Pawn"
+        },
+        {
+          "position": "h2",
+          "rank": "Pawn"
+        },
+        {
+          "position": "a1",
+          "rank": "Rook"
+        },
+        {
+          "position": "b1",
+          "rank": "Knight"
+        },
+        {
+          "position": "c1",
+          "rank": "Bishop"
+        },
+        {
+          "position": "d1",
+          "rank": "King"
+        },
+        {
+          "position": "e1",
+          "rank": "Queen"
+        },
+        {
+          "position": "f1",
+          "rank": "Bishop"
+        },
+        {
+          "position": "g1",
+          "rank": "Knight"
+        },
+        {
+          "position": "h1",
+          "rank": "Rook"
+        }
+      ]
+    }
+  }
 }
