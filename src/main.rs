@@ -6,10 +6,10 @@ pub mod piece;
 pub mod serialization;
 
 fn main() {
-    let matches = App::new("Chess Engine (Rust)")
+    let matches = App::new("Chess Toolkit (Rust)")
         .version("0.1")
         .author("Michael Leonard <maybeillrememberit@gmail.com")
-        .about("An experimental chess engine written in Rust")
+        .about("An experimental chess toolkit written in Rust")
         .arg(Arg::with_name("display")
             .help("Display the given board-file")
             .takes_value(true))
