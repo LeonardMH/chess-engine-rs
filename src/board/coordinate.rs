@@ -1,3 +1,5 @@
+use crate::board::{BOARD_HEIGHT, BOARD_WIDTH};
+
 /// Represents the coordinate system on the board
 ///
 /// Three possible coordinate systems are currently allowed for:
@@ -27,7 +29,7 @@ pub struct CoordinateLinear {
 /// NOTE: This is what sets the default coordinate system
 pub type Coordinate = CoordinateXY;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum CoordinateError {
     /// Attempting to construct or access a coordinate that is outside of the allowed board area
     OutOfBounds,
@@ -40,15 +42,22 @@ type Result<T> = std::result::Result<T, CoordinateError>;
 
 impl CoordinateXY {
     pub fn new(x: u8, y: u8) -> Result<CoordinateXY> {
+        if x >= BOARD_WIDTH || y >= BOARD_HEIGHT {
+            return Err(CoordinateError::OutOfBounds)
+        }
+
         Ok(CoordinateXY { x, y })
     }
-
     pub fn x(&self) -> u8 { self.x }
     pub fn y(&self) -> u8 { self.y }
 }
 
 impl CoordinateLinear {
     pub fn new(index: u8) -> Result<CoordinateLinear> {
+        if index >= BOARD_WIDTH * BOARD_HEIGHT {
+            return Err(CoordinateError::OutOfBounds)
+        }
+
         Ok(CoordinateLinear { index })
     }
 
@@ -57,6 +66,13 @@ impl CoordinateLinear {
 
 impl CoordinateAlgebraic {
     pub fn new(file: char, rank: char) -> Result<CoordinateAlgebraic> {
+        let x = file as u8 - 97;
+        let y = rank as u8 - 49;
+
+        if x >= BOARD_WIDTH || y >= BOARD_HEIGHT {
+            return Err(CoordinateError::OutOfBounds)
+        }
+
         Ok(CoordinateAlgebraic { file, rank })
     }
 
@@ -93,8 +109,8 @@ impl From<CoordinateXY> for CoordinateAlgebraic {
 impl From<CoordinateLinear> for CoordinateXY {
     fn from(coord: CoordinateLinear) -> CoordinateXY {
         // this conversion is dependent on the board size/shape, but it's just basic div/mod math
-        let y = coord.index / 8;
-        let x = coord.index % 8;
+        let y = coord.index / BOARD_HEIGHT;
+        let x = coord.index % BOARD_WIDTH;
 
         // we can unwrap the result as any valid Coordinate type can be converted to another
         CoordinateXY::new(x, y).unwrap()
@@ -140,7 +156,8 @@ impl From<CoordinateAlgebraic> for CoordinateLinear {
 
 #[cfg(test)]
 mod tests {
-    use crate::board::coordinate::{CoordinateAlgebraic, CoordinateLinear, CoordinateXY};
+    use crate::board::coordinate::{CoordinateAlgebraic, CoordinateLinear, CoordinateXY, CoordinateError};
+    use crate::board::{BOARD_WIDTH, BOARD_HEIGHT};
 
     static TEST_SET: [((u8, u8), (char, char), u8); 24] = [
         // move along the 1 rank
@@ -239,5 +256,24 @@ mod tests {
             let result = CoordinateXY::from(alg_expect);
             assert_eq!(result, xy_expect);
         }
+    }
+
+    #[test]
+    fn test_oob_construct_xy() {
+        assert_eq!(CoordinateXY::new(BOARD_WIDTH, BOARD_HEIGHT - 1).unwrap_err(), CoordinateError::OutOfBounds);
+        assert_eq!(CoordinateXY::new(BOARD_WIDTH - 1, BOARD_HEIGHT).unwrap_err(), CoordinateError::OutOfBounds);
+        assert_eq!(CoordinateXY::new(BOARD_WIDTH, BOARD_HEIGHT).unwrap_err(), CoordinateError::OutOfBounds);
+    }
+
+    #[test]
+    fn test_oob_construct_linear() {
+        assert_eq!(CoordinateLinear::new(BOARD_WIDTH * BOARD_HEIGHT).unwrap_err(), CoordinateError::OutOfBounds);
+    }
+
+    #[test]
+    fn test_oob_construct_algebraic() {
+        assert_eq!(CoordinateAlgebraic::new('i', '9').unwrap_err(), CoordinateError::OutOfBounds);
+        assert_eq!(CoordinateAlgebraic::new('h', '9').unwrap_err(), CoordinateError::OutOfBounds);
+        assert_eq!(CoordinateAlgebraic::new('i', '8').unwrap_err(), CoordinateError::OutOfBounds);
     }
 }

@@ -4,6 +4,9 @@ pub use crate::piece::Piece;
 pub use coordinate::Coordinate;
 use crate::board::coordinate::CoordinateLinear;
 
+const BOARD_WIDTH: u8 = 8;
+const BOARD_HEIGHT: u8 = 8;
+
 #[derive(Debug, PartialEq)]
 enum SquareColor {
     Dark,
@@ -12,6 +15,7 @@ enum SquareColor {
 
 impl SquareColor {
     fn color_for_coordinate(coordinate: Coordinate) -> SquareColor {
+        // BOARD_WIDTH and BOARD_HEIGHT dependent
         let bm_dark: u64 = 0xAA55AA55AA55AA55;
         let square_index = CoordinateLinear::from(coordinate).index();
 
@@ -40,7 +44,7 @@ impl Square {
 }
 
 pub struct Board {
-    squares: [Square; 64],
+    squares: [Square; (BOARD_HEIGHT * BOARD_WIDTH) as usize],
 }
 
 #[cfg(test)]
@@ -51,6 +55,7 @@ mod tests {
 
     #[test]
     fn test_color_determination() {
+        // BOARD_WIDTH and BOARD_HEIGHT dependent
         let color_by_index_lut = [
             Dark, Light, Dark, Light, Dark, Light, Dark, Light,
             Light, Dark, Light, Dark, Light, Dark, Light, Dark,
