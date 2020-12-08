@@ -42,7 +42,7 @@ impl Serialize for Position {
             }
         };
 
-        state.serialize_field("position", &serialization);
+        state.serialize_field("position", &serialization)?;
         state.end()
     }
 }
@@ -64,8 +64,8 @@ impl Serialize for Piece {
     {
         let mut state = serializer.serialize_struct("Piece", 2)?;
 
-        state.serialize_field("rank", &self.rank);
-        state.serialize_field("position", &self.position);
+        state.serialize_field("rank", &self.rank)?;
+        state.serialize_field("position", &self.position)?;
 
         state.end()
     }
