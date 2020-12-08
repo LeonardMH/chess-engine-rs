@@ -1,9 +1,13 @@
+#[macro_use]
+extern crate more_asserts;
+
 use clap::{Arg, App};
 use serde_json;
 
 pub mod board;
 pub mod piece;
 pub mod serialization;
+pub mod timer;
 
 fn main() {
     let matches = App::new("Chess Toolkit (Rust)")
